@@ -1,0 +1,1 @@
+![Cover image](assets/docs_assets/cover_image.png)

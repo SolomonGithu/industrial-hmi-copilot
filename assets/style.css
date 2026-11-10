@@ -1,0 +1,715 @@
+@import url("fonts/fonts.css");
+
+:root {
+    --arduino-teal: #008184;
+    --arduino-teal-dark: #006a6c;
+    --background: #DAE3E3;
+    --text: #2C353A;
+    --muted: #5D6A6B;
+    --border: #C9D2D2;
+    --panel: #FFFFFF;
+    --green: #16A588;
+    --green-soft: #E6F5F1;
+    --red: #B00020;
+    --red-soft: #FFEAEA;
+    --amber: #A66B00;
+    --amber-soft: #FFF5D9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background: var(--background);
+    color: var(--text);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Helvetica Neue",
+        sans-serif;
+}
+
+.app-shell {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.eyebrow,
+.section-kicker,
+.ai-label,
+.stat-label,
+.meta-label {
+    color: var(--muted);
+    font-family: "Roboto Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+.arduino-text {
+    margin: 4px 0 4px;
+    color: var(--arduino-teal);
+    font-family: "Roboto Mono", monospace;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.subtitle {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.brand-logos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 22px;
+    flex-shrink: 0;
+    margin-left: 24px;
+}
+
+.edge-impulse-logo {
+    display: block;
+    width: 132px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.arduino-logo {
+    display: block;
+    width: auto;
+    height: 48px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(380px, 0.85fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.container {
+    background: var(--panel);
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.workflow-container {
+    min-height: 690px;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.section-heading h2 {
+    margin: 3px 0 0;
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.status-badge {
+    padding: 7px 11px;
+    border-radius: 999px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+.status-badge.idle {
+    color: var(--muted);
+    background: #EDF1F1;
+}
+
+.status-badge.moving {
+    color: var(--arduino-teal-dark);
+    background: #DFF2F2;
+}
+
+.status-badge.progress {
+    color: var(--green);
+    background: var(--green-soft);
+}
+
+.status-badge.complete {
+    color: #236C55;
+    background: #DDF4EA;
+}
+
+.assembly-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.assembly-meta > div {
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.assembly-meta strong {
+    display: block;
+    margin-top: 4px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 15px;
+}
+
+.product-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    padding: 20px;
+    background: #F6F8F8;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.product-box {
+    position: relative;
+    width: min(420px, 75vw);
+    aspect-ratio: 1 / 1;
+    border: 5px solid #566366;
+    border-radius: 14px;
+    background:
+        linear-gradient(135deg, rgba(255,255,255,0.85), rgba(226,232,232,0.75));
+    box-shadow:
+        inset 0 0 0 1px rgba(44,53,58,0.08),
+        0 16px 35px rgba(44,53,58,0.10);
+}
+
+.product-box::after {
+    content: "";
+    position: absolute;
+    inset: 28px;
+    border: 1px dashed #AEB9BA;
+    border-radius: 7px;
+    pointer-events: none;
+}
+
+.product-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    color: #768283;
+    font-family: "Roboto Mono", monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.screw {
+    position: absolute;
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #D04A50;
+    border: 5px solid #FFFFFF;
+    box-shadow:
+        0 3px 8px rgba(44,53,58,0.20),
+        inset 0 0 0 2px rgba(130,0,0,0.20);
+    transition:
+        background 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.screw span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18px;
+    height: 4px;
+    background: #FFFFFF;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+}
+
+.screw span::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 18px;
+    background: #FFFFFF;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+}
+
+.screw.tightened {
+    background: var(--green);
+    transform: scale(1.08);
+    box-shadow:
+        0 0 0 5px rgba(22,165,136,0.14),
+        0 4px 10px rgba(44,53,58,0.20);
+}
+
+.screw-1 {
+    top: 20px;
+    left: 20px;
+}
+
+.screw-2 {
+    top: 20px;
+    right: 20px;
+}
+
+.screw-3 {
+    bottom: 20px;
+    left: 20px;
+}
+
+.screw-4 {
+    bottom: 20px;
+    right: 20px;
+}
+
+.box-center {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tool-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #7D898A;
+    font-family: "Roboto Mono", monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.tool-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    border: 2px solid #9AA5A6;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: 300;
+    transform: rotate(45deg);
+}
+
+.tool-icon::first-letter {
+    transform: rotate(-45deg);
+}
+
+.assembly-result {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.assembly-result.success {
+    color: #236C55;
+    background: var(--green-soft);
+    border: 1px solid #C5E8DE;
+}
+
+.assembly-result.bad {
+    color: var(--red);
+    background: var(--red-soft);
+    border: 1px solid #F0C3C8;
+}
+
+.assembly-result span {
+    opacity: 0.85;
+}
+
+.assembly-progress {
+    margin-top: 18px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.progress-label strong {
+    color: var(--text);
+    font-family: "Roboto Mono", monospace;
+}
+
+.progress-track {
+    height: 8px;
+    border-radius: 99px;
+    background: #E3E9E9;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    border-radius: 99px;
+    background: var(--green);
+    transition: width 220ms ease;
+}
+
+.workflow-hint {
+    margin-top: 15px;
+    padding: 12px 14px;
+    border-left: 3px solid var(--arduino-teal);
+    background: #F2F8F8;
+    color: var(--text);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.stat-card {
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 7px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 27px;
+}
+
+.stat-card.success {
+    background: var(--green-soft);
+    border-color: #C5E8DE;
+}
+
+.stat-card.success strong {
+    color: var(--green);
+}
+
+.stat-card.danger {
+    background: var(--red-soft);
+    border-color: #F1C5C9;
+}
+
+.stat-card.danger strong {
+    color: var(--red);
+}
+
+.ai-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    font-family: "Roboto Mono", monospace;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 4px var(--green-soft);
+}
+
+.ai-feedback {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    padding: 14px;
+    border-radius: 12px;
+    background: #F1F7F7;
+    border: 1px solid #D4E5E5;
+}
+
+.ai-feedback.warning {
+    background: var(--red-soft);
+    border-color: #F0C3C8;
+}
+
+.ai-feedback.empty {
+    background: #F7F9F9;
+}
+
+.ai-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    background: var(--arduino-teal);
+    color: white;
+    font-family: "Roboto Mono", monospace;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.ai-feedback.warning .ai-mark {
+    background: var(--red);
+}
+
+.ai-feedback strong {
+    font-size: 12px;
+}
+
+.ai-feedback p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.chat-history {
+    max-height: 210px;
+    margin-top: 14px;
+    padding: 8px 0;
+    overflow-y: auto;
+}
+
+.chat-placeholder {
+    padding: 12px 2px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.chat-message p {
+    margin: 4px 0 0;
+}
+
+.chat-message.operator {
+    margin-left: 25px;
+    background: #EDF3F3;
+}
+
+.chat-message.assistant {
+    margin-right: 25px;
+    background: #F6F8F8;
+    border-left: 3px solid var(--arduino-teal);
+}
+
+.chat-role {
+    color: var(--muted);
+    font-family: "Roboto Mono", monospace;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+.chat-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.chat-form input {
+    min-width: 0;
+    flex: 1;
+    height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 0 11px;
+    outline: none;
+    color: var(--text);
+    font-size: 12px;
+}
+
+.chat-form input:focus {
+    border-color: var(--arduino-teal);
+    box-shadow: 0 0 0 2px rgba(0,129,132,0.10);
+}
+
+.chat-form button {
+    height: 38px;
+    padding: 0 14px;
+    border: none;
+    border-radius: 7px;
+    background: var(--arduino-teal);
+    color: #FFFFFF;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.chat-form button:hover {
+    background: var(--arduino-teal-dark);
+}
+
+.motion-log {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.motion-log li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-top: 1px solid var(--border);
+}
+
+.motion-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.motion-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #A8B1B2;
+}
+
+.motion-dot.tightening {
+    background: var(--green);
+}
+
+.motion-dot.moving {
+    background: var(--arduino-teal);
+}
+
+.motion-dot.idle {
+    background: #899394;
+}
+
+.motion-time {
+    color: var(--muted);
+    font-family: "Roboto Mono", monospace;
+    font-size: 9px;
+}
+
+.empty-log {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.connection-banner {
+    margin-top: 18px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    background: var(--red-soft);
+    color: var(--red);
+    text-align: center;
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 1050px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .workflow-container {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 12px;
+    }
+
+    .header {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .brand-logos {
+        gap: 10px;
+        margin-left: 12px;
+    }
+
+    .edge-impulse-logo {
+        width: 88px;
+        height: 28px;
+    }
+
+    .arduino-logo {
+        height: 32px;
+    }
+
+    .arduino-text {
+        font-size: 18px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+    }
+
+    .assembly-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .product-stage {
+        min-height: 330px;
+    }
+
+    .product-box {
+        width: min(330px, 78vw);
+    }
+}

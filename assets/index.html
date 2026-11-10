@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial HMI Copilot</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <header class="header">
+            <div>
+                <div class="eyebrow">EDGE AI / ASSEMBLY MONITORING</div>
+                <h1 class="arduino-text">Industrial HMI Copilot</h1>
+                <p class="subtitle">Tool motion perception, workflow logic and local AI explanations</p>
+            </div>
+            <div class="brand-logos" aria-label="Technology logos">
+                <img class="edge-impulse-logo" src="./img/Edge Impulse Full Logo_RGB.jpg" alt="Edge Impulse logo">
+                <img class="arduino-logo" src="./img/logo.svg" alt="Arduino logo">
+            </div>
+        </header>
+
+        <main class="main-content">
+
+            <!-- LEFT: physical workflow visualization -->
+            <section class="container workflow-container">
+
+                <div class="section-heading">
+                    <div>
+                        <div class="section-kicker">LIVE ASSEMBLY</div>
+                        <h2>Product assembly</h2>
+                    </div>
+
+                    <div id="phaseBadge" class="status-badge idle">
+                        IDLE
+                    </div>
+                </div>
+
+                <div class="assembly-meta">
+                    <div>
+                        <span class="meta-label">ASSEMBLY</span>
+                        <strong id="assemblyId">1</strong>
+                    </div>
+
+                    <div>
+                        <span class="meta-label">SCREWS</span>
+                        <strong>
+                            <span id="tightenedCount">0</span>/<span id="totalScrews">4</span>
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span class="meta-label">LAST MOTION</span>
+                        <strong id="lastMotion">idle</strong>
+                    </div>
+                </div>
+
+                <div class="product-stage">
+                    <div class="product-box">
+                        <div class="product-label">ASSEMBLY</div>
+
+                        <div class="screw screw-1" data-index="0">
+                            <span></span>
+                        </div>
+
+                        <div class="screw screw-2" data-index="1">
+                            <span></span>
+                        </div>
+
+                        <div class="screw screw-3" data-index="2">
+                            <span></span>
+                        </div>
+
+                        <div class="screw screw-4" data-index="3">
+                            <span></span>
+                        </div>
+
+                        <div class="box-center">
+                            <div class="tool-indicator">
+                                <div class="tool-icon">+</div>
+                                <span>TOOL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="assemblyResult" class="assembly-result hidden">
+                    <strong id="assemblyResultTitle"></strong>
+                    <span id="assemblyResultReason"></span>
+                </div>
+
+                <div class="assembly-progress">
+                    <div class="progress-label">
+                        <span>Assembly progress</span>
+                        <strong id="progressText">0%</strong>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="workflow-hint" id="workflowHint">
+                    Move the tool to begin the assembly sequence.
+                </div>
+
+            </section>
+
+            <!-- RIGHT: AI assistant and statistics -->
+            <aside class="right-column">
+
+                <section class="container stats-container">
+                    <div class="section-heading">
+                        <div>
+                            <div class="section-kicker">PRODUCTION</div>
+                            <h2>Assembly results</h2>
+                        </div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card success">
+                            <span class="stat-label">SUCCESSFUL</span>
+                            <strong id="successfulAssemblies">0</strong>
+                        </div>
+
+                        <div class="stat-card danger">
+                            <span class="stat-label">DEFECTIVE</span>
+                            <strong id="badAssemblies">0</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="container assistant-container">
+                    <div class="section-heading">
+                        <div>
+                            <div class="section-kicker">LOCAL SLM</div>
+                            <h2>AI operator feedback</h2>
+                        </div>
+                        <div class="ai-status">
+                            <span class="status-dot"></span>
+                            ON DEVICE
+                        </div>
+                    </div>
+
+                    <div id="aiFeedback" class="ai-feedback empty">
+                        <div class="ai-mark">AI</div>
+                        <div>
+                            <strong>Assembly assistant ready</strong>
+                            <p>
+                                Feedback about the operator's assembly activity
+                                will appear here.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="chat-history" id="chatHistory">
+                        <div class="chat-placeholder">
+                            Ask the assistant about the current or previous assemblies.
+                        </div>
+                    </div>
+
+                    <form id="chatForm" class="chat-form">
+                        <input
+                            id="chatInput"
+                            type="text"
+                            maxlength="500"
+                            autocomplete="off"
+                            placeholder="Ask: Why did assembly 3 fail?"
+                        >
+                        <button type="submit">Ask</button>
+                    </form>
+                </section>
+
+                <section class="container activity-container">
+                    <div class="section-heading">
+                        <div>
+                            <div class="section-kicker">PERCEPTION LAYER</div>
+                            <h2>Motion classifications</h2>
+                        </div>
+                    </div>
+
+                    <ul id="motionLog" class="motion-log">
+                        <li class="empty-log">Waiting for motion events...</li>
+                    </ul>
+                </section>
+
+            </aside>
+        </main>
+
+        <div id="connectionBanner" class="connection-banner hidden">
+            Connection to the UNO Q lost. Check the board and Web UI.
+        </div>
+
+    </div>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
