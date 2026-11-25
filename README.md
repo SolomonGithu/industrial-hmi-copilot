@@ -33,7 +33,7 @@ The language model never decides whether an assembly passed or failed. That deci
 
 ### Software
 
-- [Edge Impulse Studio](https://studio.edgeimpulse.com/login) and the [Edge Impulse CLI](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli)
+- [Edge Impulse Studio](https://edgeimp.com/community26) and the [Edge Impulse CLI](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli)
 - [Arduino App Lab](https://docs.arduino.cc/software/app-lab/) and the [Arduino IDE](https://docs.arduino.cc/tutorials/uno-q/user-manual/#arduino-ide-beta)
 - Small Language Models available locally through App Lab: Qwen, Llama, Gemma
 - Git and an SSH client
@@ -65,7 +65,7 @@ Upload this [sketch](https://github.com/SolomonGithu/industrial-hmi-copilot/blob
 
 ![Motion data](assets/docs_assets/img6_motion_data.png)
 
-After uploading the sketch, ensure that your UNO Q is connected to your computer with a USB cable and there are no Serial Monitors holding the UNO's COM port. Then install and/or start the [Edge Impulse CLI](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli) in a terminal. This is a highly advanced software that is used to control local devices, act as a proxy to synchronize data for devices that don't have an internet connection, and to upload and convert local files. In this project, we will use the [edge-impulse-data-forwarder](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli/data-forwarder) tool of the CLI to capture Serial data from the UNO Q board and automatically upload them to an Edge Impulse project. Head to [Edge Impulse Studio](https://studio.edgeimpulse.com/login) and create a new project. Once the project has been created, ensure your PC has internet access and run the command below on a CLI to start the data forwarder:
+After uploading the sketch, ensure that your UNO Q is connected to your computer with a USB cable and there are no Serial Monitors holding the UNO's COM port. Then install and/or start the [Edge Impulse CLI](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli) in a terminal. This is a highly advanced software that is used to control local devices, act as a proxy to synchronize data for devices that don't have an internet connection, and to upload and convert local files. In this project, we will use the [edge-impulse-data-forwarder](https://docs.edgeimpulse.com/tools/clis/edge-impulse-cli/data-forwarder) tool of the CLI to capture Serial data from the UNO Q board and automatically upload them to an Edge Impulse project. Head to [Edge Impulse Studio](https://edgeimp.com/community26) and create a new project. Once the project has been created, ensure your PC has internet access and run the command below on a CLI to start the data forwarder:
 ```
 edge-impulse-data-forwarder
 ```
